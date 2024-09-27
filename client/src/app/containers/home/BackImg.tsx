@@ -1,9 +1,9 @@
 import React from "react";
 import Image from "next/image";
-import backImg from "../../../image/back.png";
+import backImg from "../../image/back.png";
 const BackImg = () => {
   return (
-    <div className="md:w-screen md:h-[100vh] fixed -z-10">
+    <div className="md:w-screen md:h-[100vh] fixed -z-10  -top-20">
       <Image
         src={backImg}
         alt=""
