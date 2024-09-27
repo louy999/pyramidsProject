@@ -1,5 +1,7 @@
 "use client";
+
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 import Link from "next/link";
 
 const TypeLink = () => {
@@ -13,7 +15,7 @@ const TypeLink = () => {
   ];
 
   return (
-    <div className={`w-full flex justify-center transition-all duration-300 `}>
+    <div className={`w-full flex justify-center transition-all duration-300`}>
       <ul className="flex justify-center items-center gap-4 capitalize p-4 md:py-2 rounded-md shadow-md bg-white text-black">
         {dataLink.map((link, index) => (
           <li
@@ -32,4 +34,12 @@ const TypeLink = () => {
   );
 };
 
-export default TypeLink;
+const TypeLinkWrapper = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <TypeLink />
+    </Suspense>
+  );
+};
+
+export default TypeLinkWrapper;
