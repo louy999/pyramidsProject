@@ -17,10 +17,10 @@ const BarsNav = () => {
       {dataLink.map((link, index) => (
         <li
           key={index}
-          className={`duration-300 ${
-            pathname === link.href ? "text-color1 text-2xl px-2" : ""
+          className={`duration-300 text-[15px] md:text-base ${
+            pathname === link.href ? "text-color1 text-xl px-2" : ""
           }
-         hover:bg-color1 hover:text-color2 rounded-md hover:px-2 `}
+         hover:bg-color1 hover:text-color2 rounded-md hover:px-2  `}
         >
           <Link href={link.href}>{link.name}</Link>
         </li>

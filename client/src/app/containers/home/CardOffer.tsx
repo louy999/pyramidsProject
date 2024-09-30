@@ -39,7 +39,7 @@ const CardOffer = () => {
           <div className="flex w-full gap-2 mt-5">
             <div className="border-2 border-black relative rounded-md p-1 w-2/4 flex ">
               <span className=" text-[10px] absolute bottom-6 px-2 bg-gray-800 ">
-                Project
+                Type
               </span>
               <span className="w-full text-center">commercial</span>
             </div>
