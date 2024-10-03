@@ -38,14 +38,12 @@ const CalculatorPage = () => {
             className="w-2/4 p-2 text-black rounded-md"
             id=""
           />
-          <input
-            type="number"
-            name=""
-            placeholder="The down payment percentage"
-            id=""
-            value=""
-            className="w-2/4 p-2 text-black rounded-md text-[13px]"
-          />
+          <select className="w-2/4 p-2 text-black rounded-md text-[13px]">
+            <option value="">instalment</option>
+            <option value="city">8</option>
+            <option value="city">9</option>
+            <option value="city">10</option>
+          </select>
         </div>
         <div className="w-full flex gap-2 md:gap-5">
           <select className="w-full text-xl py-4 md:p-2 px-2 bg-color2 rounded-md">
@@ -56,18 +54,14 @@ const CalculatorPage = () => {
           </select>
 
           <select className="w-full text-xl py-4 md:p-2 px-2 bg-color2 rounded-md">
-            <option value="city" disabled>
-              payment
-            </option>
+            <option value="">payment</option>
             <option value="city">city</option>
             <option value="city">city</option>
             <option value="city">city</option>
             <option value="city">city</option>
           </select>
           <select className="w-full text-xl py-4 md:p-2 px-2 bg-color2 rounded-md">
-            <option value="city" disabled>
-              installment
-            </option>
+            <option value="">installment</option>
             <option value="city">city</option>
             <option value="city">city</option>
             <option value="city">city</option>
