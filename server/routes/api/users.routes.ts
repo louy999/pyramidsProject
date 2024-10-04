@@ -76,7 +76,7 @@ routes.post('/auth', async (req: Request, res: Response, next) => {
 
 		res.json({
 			status: 'success',
-			data: {...user},
+			data: {...user, token},
 			message: 'user auth successfully',
 		})
 	} catch (err) {
