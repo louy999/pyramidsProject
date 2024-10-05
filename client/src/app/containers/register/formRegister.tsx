@@ -1,12 +1,12 @@
 "use client";
 import React, { useState } from "react";
 import axios from "axios";
-import { setCookie } from "cookies-next";
 import Link from "next/link";
 
-const LoginForm = () => {
+const FormRegister = () => {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
 
@@ -16,19 +16,14 @@ const LoginForm = () => {
     if (phone !== "") {
       if (password !== "") {
         try {
-          const res = await axios.post(
-            `${process.env.LOCAL_API_URL}/users/auth`,
-            {
-              phone,
-              password,
-            }
-          );
-          setCookie("token", res.data.data.token);
-          setCookie("id", res.data.data.id);
-          window.history.back();
-          setTimeout(() => {
-            window.location.reload();
-          }, 1000);
+          const res = await axios.post(`${process.env.LOCAL_API_URL}/users`, {
+            name,
+            phone,
+            password,
+          });
+
+          window.location.pathname = "/login";
+          console.log(res.data);
         } catch (error) {
           if (axios.isAxiosError(error)) {
             if (error.response) {
@@ -69,10 +64,26 @@ const LoginForm = () => {
         <div className="">
           <div className="shadow-md mb-10 border-2 relative border-black py-4 px-2 rounded-md">
             <label
+              htmlFor="text"
+              className="absolute bottom-14  bg-color2 px-1 text-xl"
+            >
+              Name
+            </label>
+            <input
+              type="text"
+              name="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              id="phone"
+              className="w-full py-1 px-2 rounded-md text-color2"
+            />
+          </div>
+          <div className="shadow-md mb-10 border-2 relative border-black py-4 px-2 rounded-md">
+            <label
               htmlFor="phone"
               className="absolute bottom-14  bg-color2 px-1 text-xl"
             >
-              phone
+              Phone
             </label>
             <input
               type="text"
@@ -83,12 +94,13 @@ const LoginForm = () => {
               className="w-full py-1 px-2 rounded-md text-color2"
             />
           </div>
+
           <div className="shadow-md mb-3 border-2 relative border-black py-4 px-2 rounded-md">
             <label
               htmlFor="password"
               className="absolute bottom-14  bg-color2 px-1 text-xl"
             >
-              password
+              Password
             </label>
 
             <input
@@ -102,16 +114,10 @@ const LoginForm = () => {
           </div>
           <div className="flex justify-between px-2 ">
             <Link
-              href="/"
+              href="/login"
               className="cursor-pointer opacity-50 hover:opacity-100 hover:bg-color1 rounded-md duration-300 hover:text-color2 hover:px-2 hover:py-1"
             >
-              Forget Password
-            </Link>
-            <Link
-              href="/register"
-              className="cursor-pointer opacity-50 hover:opacity-100 hover:bg-color1 rounded-md duration-300 hover:text-color2 hover:px-2 hover:py-1"
-            >
-              Register
+              Login / have an account
             </Link>
           </div>
           <div className="w-full flex justify-center">
@@ -138,7 +144,7 @@ const LoginForm = () => {
             ) : (
               <input
                 type="button"
-                value="Login"
+                value="Create Account"
                 className="bg-color1 rounded-md px-4 py-2 text-color3 cursor-pointer hover:px-7 hover:py-3 duration-300"
                 onClick={fetchAuthLogin}
               />
@@ -150,4 +156,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default FormRegister;

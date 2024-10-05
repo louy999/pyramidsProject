@@ -5,5 +5,7 @@ CREATE TABLE offer(
     type VARCHAR(250) NOT NULL,
     project_id uuid REFERENCES project(id),
     floor VARCHAR(250) NOT NULL,
-    unit_space VARCHAR(250) NOT NULL
+    unit_space VARCHAR(250) NOT NULL,
+    img TEXT,
+    project_name VARCHAR(250) NOT NULL
 )

@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -5,7 +6,10 @@ import backImg from "../../image/img.jpg";
 import { FaWhatsapp } from "react-icons/fa";
 import { MdAddCall } from "react-icons/md";
 
-const CardOffer = () => {
+const CardOffer = (props) => {
+  console.log(props.offer);
+  const priceMeter = 120000;
+
   return (
     <div>
       <div className="max-w-sm  border rounded-lg shadow bg-gray-800 border-color2">
@@ -19,8 +23,8 @@ const CardOffer = () => {
           />
         </Link>
         <div className="p-5 relative flex justify-start flex-wrap ">
-          <div className="type absolute right-2 bottom-44 mb-2 bg-gray-800 p-1 rounded-md ">
-            pyramids business tower
+          <div className="type absolute right-2 bottom-44 mb-2 bg-gray-800 p-1 rounded-md capitalize ">
+            {props.offer.project_name}
           </div>
           <div className="flex w-full gap-2">
             <div className="border-2 border-black relative rounded-md p-1 w-2/4 flex ">
@@ -31,7 +35,7 @@ const CardOffer = () => {
             </div>
             <div className="border-2 border-black relative rounded-md p-1 w-2/4 flex ">
               <span className=" text-[10px] absolute bottom-6 px-2 bg-gray-800 ">
-                Installment
+                Returning
               </span>
               <span className="w-full text-center">1,000,000</span>
             </div>
@@ -41,13 +45,15 @@ const CardOffer = () => {
               <span className=" text-[10px] absolute bottom-6 px-2 bg-gray-800 ">
                 Type
               </span>
-              <span className="w-full text-center">commercial</span>
+              <span className="w-full text-center">{props.offer.type}</span>
             </div>
             <div className="border-2 border-black relative rounded-md p-1 w-2/4 flex ">
               <span className=" text-[10px] absolute bottom-6 px-2 bg-gray-800 ">
-                Returning
+                unit space
               </span>
-              <span className="w-full text-center">1,000,000</span>
+              <span className="w-full text-center">
+                {props.offer.unit_space}M
+              </span>
             </div>
           </div>
           <div className="border-2 border-black relative rounded-md p-1 mt-3 w-full gap-2 flex justify-between">
