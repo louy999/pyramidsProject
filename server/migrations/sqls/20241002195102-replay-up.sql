@@ -4,5 +4,5 @@ CREATE TABLE replay(
     date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     user_id uuid REFERENCES users(id),
     request_id uuid REFERENCES request(id),
-    replay text []
+    replay text
 );

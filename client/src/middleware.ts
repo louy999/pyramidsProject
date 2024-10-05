@@ -1,26 +1,21 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-// import { getCookie } from "cookies-next";
 
 export function middleware(request: NextRequest) {
-  // Get the token from the cookies
   const token = request.cookies.get("token");
   const url = request.nextUrl;
 
-  // Check if the user is trying to access the login page
+  // If the URL is "/login", handle the token existence logic
   if (url.pathname === "/login") {
     if (token) {
-      // Redirect to the previous page (or a different page if needed)
-      const previousPage = request.headers.get("referer") || "/"; // Default to root if no referrer
+      const previousPage = request.headers.get("referer") || "/";
       return NextResponse.redirect(new URL(previousPage, request.url));
     }
+    return NextResponse.next(); // No token, allow access to login page
   }
-
-  // Continue to the requested page if no token is present
-  return NextResponse.next();
 }
 
-// Middleware config to apply only to certain routes
+// Middleware config to apply to certain routes
 export const config = {
-  matcher: ["/login"], // Apply this middleware only to the login page
+  matcher: ["/login", "/req"], // Apply to /login and /req routes
 };

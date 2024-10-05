@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import axios from "axios";
+import axios from "axios"; 
 import { setCookie } from "cookies-next";
 import Link from "next/link";
 
@@ -10,7 +10,7 @@ const LoginForm = () => {
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
 
-  const fetchAuthLogin = async (e) => {
+  const fetchAuthLogin = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     setLoading(true);
     if (phone !== "") {
@@ -24,12 +24,21 @@ const LoginForm = () => {
             }
           );
           setCookie("token", res.data.data.token);
+          setCookie("id", res.data.data.id);
           window.history.back();
           setTimeout(() => {
             window.location.reload();
           }, 1000);
         } catch (error) {
-          setErr(error.response.data.message);
+          if (axios.isAxiosError(error)) {
+            if (error.response) {
+              setErr(error.response.data.message);
+            } else {
+              setErr("An unexpected error occurred.");
+            }
+          } else {
+            setErr("An unexpected error occurred.");
+          }
           setTimeout(() => {
             setErr("");
           }, 5000);
