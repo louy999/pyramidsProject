@@ -66,19 +66,19 @@ class RequestsModel {
 			throw new Error(`.could not find Req ${user_id}, ${err}`)
 		}
 	}
-	async updateReq(id: string): Promise<RequestsType> {
+	async updateReq(u: RequestsType): Promise<RequestsType> {
 		try {
 			//open connect with DB
 			const connect = await db.connect()
 			const sql = 'UPDATE request SET  req=$1  WHERE id=$2 RETURNING *'
 			//run query
-			const result = await connect.query(sql, [id])
+			const result = await connect.query(sql, [u.req, u.id])
 			//release connect
 			connect.release()
 			//return created Req
 			return result.rows[0]
 		} catch (err) {
-			throw new Error(`.could not find Req ${id}, ${err}`)
+			throw new Error(`.could not find Req ${u.id}, ${err}`)
 		}
 	}
 

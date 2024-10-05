@@ -2,6 +2,8 @@ import React from "react";
 import axios from "axios";
 import { formatDistanceToNow, parseISO } from "date-fns";
 import { cookies } from "next/headers";
+import DeleteReq from "./deleteReq";
+import EditReq from "./editReq";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const HandelRequestUser = async (props: any) => {
@@ -52,13 +54,19 @@ const HandelRequestUser = async (props: any) => {
                             </h6>
                           </div>
                         </div>
-                        <div className="text-gray-300 flex gap-4  ">
-                          <div className="bg-blue-600 rounded-md text-white py-1 px-2 cursor-pointer capitalize">
-                            edit
-                          </div>
-                          <div className="bg-red-400 rounded-md text-white py-1 px-2 cursor-pointer capitalize">
-                            delete
-                          </div>
+                        <div className="text-gray-300 flex gap-4 flex-wrap md:flex-nowrap justify-end w-8 md:w-fit ">
+                          {cookies()?.get("id")?.value ===
+                          props.data.user_id ? (
+                            <>
+                              <EditReq
+                                id={props.data.id}
+                                text={requestData.req}
+                              />
+                              <DeleteReq id={props.data.id} />
+                            </>
+                          ) : (
+                            ""
+                          )}
                         </div>
                       </div>
                       <p className="text-gray-800 text-sm font-normal leading-snug">
