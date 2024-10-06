@@ -5,10 +5,15 @@ import Link from "next/link";
 import backImg from "../../image/img.jpg";
 import { FaWhatsapp } from "react-icons/fa";
 import { MdAddCall } from "react-icons/md";
-
-const CardOffer = (props) => {
-  console.log(props.offer);
-  const priceMeter = 120000;
+interface CardOfferProps {
+  offer: {
+    project_name: string;
+    type: string;
+    unit_space: number;
+  };
+}
+const CardOffer = (props: CardOfferProps) => {
+  // const priceMeter = 120000;
 
   return (
     <div>
