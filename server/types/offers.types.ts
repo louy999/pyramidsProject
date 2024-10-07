@@ -7,6 +7,9 @@ type OffersType = {
 	unit_space: string | number
 	img: string
 	project_name: string
+	code: string
+	down_payment: string
+	retuning: string
 }
 
 export default OffersType

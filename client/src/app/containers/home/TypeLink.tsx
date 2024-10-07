@@ -8,7 +8,7 @@ const TypeLink = () => {
   const searchParams = useSearchParams();
 
   const dataLink = [
-    { name: "commercial", href: `?type=com` },
+    { name: "commercial", href: `?type=commercial` },
     { name: "admin", href: `?type=admin` },
     { name: "clinics", href: `?type=clinics` },
     { name: "apartment", href: `?type=apartment` },

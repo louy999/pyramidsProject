@@ -2,7 +2,6 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import backImg from "../../image/img.jpg";
 import { FaWhatsapp } from "react-icons/fa";
 import { MdAddCall } from "react-icons/md";
 interface CardOfferProps {
@@ -10,18 +9,19 @@ interface CardOfferProps {
     project_name: string;
     type: string;
     unit_space: number;
+    img: string;
+    down_payment: string;
+    retuning: string;
   };
 }
 const CardOffer = (props: CardOfferProps) => {
-  // const priceMeter = 120000;
-
   return (
     <div>
       <div className="max-w-sm  border rounded-lg shadow bg-gray-800 border-color2">
         <Link href="#">
           <Image
             className="rounded-t-lg"
-            src={backImg}
+            src={`${process.env.LOCAL_API_IMG}/image/${props.offer.img}`}
             alt=""
             width={1000}
             height={1000}
@@ -36,13 +36,15 @@ const CardOffer = (props: CardOfferProps) => {
               <span className=" text-[10px] absolute bottom-6 px-2 bg-gray-800 ">
                 Down Payment
               </span>
-              <span className="w-full text-center ">1,000,000</span>
+              <span className="w-full text-center ">
+                {props.offer.down_payment}
+              </span>
             </div>
             <div className="border-2 border-black relative rounded-md p-1 w-2/4 flex ">
               <span className=" text-[10px] absolute bottom-6 px-2 bg-gray-800 ">
                 Returning
               </span>
-              <span className="w-full text-center">1,000,000</span>
+              <span className="w-full text-center">{props.offer.retuning}</span>
             </div>
           </div>
           <div className="flex w-full gap-2 mt-5">

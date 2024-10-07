@@ -37,7 +37,7 @@ app.get('/healthz', (_req: Request, res: Response) => {
 	res.send({status: 'ok✌️'})
 })
 
-app.post('/upload', upload.single('image'), (req: any, res) => {
+app.post('/upload/image', upload.single('image'), (req: any, res) => {
 	res.send(req.file.filename)
 })
 app.post(

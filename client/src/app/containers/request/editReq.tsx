@@ -31,17 +31,17 @@ const EditReq = (props: EditReqProps) => {
   return (
     <>
       <div
-        className="bg-blue-600 rounded-md text-white py-1 px-2 cursor-pointer capitalize"
+        className="bg-color2 rounded-md text-white py-1 px-2 cursor-pointer capitalize"
         onClick={() => setShow((prev) => !prev)}
       >
         edit
       </div>
       {show ? (
-        <div className="bg-color1 p-2 rounded-md absolute top-2/4 -translate-y-2/4 left-2/4 -translate-x-2/4 text-white flex justify-end flex-wrap gap-3">
+        <div className="bg-color2 p-2 rounded-md absolute top-2/4 -translate-y-2/4 left-2/4 -translate-x-2/4 text-white flex justify-end flex-wrap gap-3">
           <div className="flex justify-between cursor-pointer items-center w-full">
-            <h2>Edit Your Req</h2>
+            <h2>Edit Your Request</h2>
             <button onClick={() => setShow(false)}>
-              <FaWindowClose className="text-color2 text-xl m-1" />
+              <FaWindowClose className="text-color1 text-xl m-1" />
             </button>
           </div>
           <textarea
@@ -57,7 +57,7 @@ const EditReq = (props: EditReqProps) => {
             type="button"
             value="edit"
             onClick={editReqFetch}
-            className="bg-color2 rounded-md py-1 px-2 text-white capitalize text-end cursor-pointer"
+            className="bg-color1 rounded-md py-1 px-2 text-white capitalize text-end cursor-pointer"
           />
         </div>
       ) : (

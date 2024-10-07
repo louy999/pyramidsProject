@@ -8,7 +8,7 @@ class OffersModel {
 			//open connect with DB1
 			const connect = await db.connect()
 			const sql =
-				'INSERT INTO offer ( type, project_id, floor, unit_space, img, project_name ) values ($1, $2, $3, $4, $5, $6) returning *'
+				'INSERT INTO offer ( type, project_id, floor, unit_space, img, project_name, code, down_payment, retuning ) values ($1, $2, $3, $4, $5, $6, $7, $8, $9) returning *'
 			//run query
 			const result = await connect.query(sql, [
 				u.type,
@@ -17,6 +17,9 @@ class OffersModel {
 				u.unit_space,
 				u.img,
 				u.project_name,
+				u.code,
+				u.down_payment,
+				u.retuning,
 			])
 			//release connect
 			connect.release()
@@ -79,7 +82,7 @@ class OffersModel {
 			//open connect with DB
 			const connect = await db.connect()
 			const sql =
-				'UPDATE offer SET  type=$1, floor=$2, unit_space=$3, img=$4, project_name=$5 WHERE id=$4 RETURNING *'
+				'UPDATE offer SET  type=$1, floor=$2, unit_space=$3, img=$4, project_name=$5, code=$6, down_payment=$7 retuning=$8 WHERE id=$9 RETURNING *'
 			//run query
 			const result = await connect.query(sql, [
 				u.type,
@@ -87,6 +90,9 @@ class OffersModel {
 				u.unit_space,
 				u.img,
 				u.project_name,
+				u.code,
+				u.down_payment,
+				u.retuning,
 				u.id,
 			])
 			//release connect
