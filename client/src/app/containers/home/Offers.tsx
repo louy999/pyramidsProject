@@ -45,7 +45,7 @@ const Offers = () => {
     }
   }, [search, allOffers]);
   return (
-    <div className="absolute top-2/4 lg:top-[70%] h-screen w-full md:w-3/4 bg-color1 bg-opacity-30 md:bg-opacity-15 md:left-2/4 md:-translate-x-2/4 rounded-md py-4 px-2">
+    <div className="absolute top-2/4 lg:top-[70%]  w-full md:w-3/4 bg-color1 bg-opacity-30 md:bg-opacity-15 md:left-2/4 md:-translate-x-2/4 rounded-md py-4 px-2">
       <TypeLink />
       <div className="flex justify-center flex-wrap gap-5 p-5">
         {filteredOffers.length > 0 ? (

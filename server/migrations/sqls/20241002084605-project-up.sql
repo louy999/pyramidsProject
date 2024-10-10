@@ -4,5 +4,11 @@ CREATE TABLE project(
     id uuid DEFAULT uuid_generate_v4 () PRIMARY KEY,
     date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     name VARCHAR(250) NOT NULL UNIQUE,
-    description TEXT
+    description TEXT,
+    img TEXT,
+    type TEXT [],
+    price_meter TEXT [],
+    meter_start TEXT [],
+    delivery TEXT [],
+    installment TEXT []
 )
