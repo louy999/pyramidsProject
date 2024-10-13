@@ -4,18 +4,29 @@ import axios from "axios";
 import Image from "next/image";
 import defaultImg from "../../image/img.jpg";
 import ProjectPage from "./projectPage";
-
-// Define the shape of a project object
-interface Project {
-  img: string; // Assuming each project has an 'img' property
-  // Add other properties if needed
-  name: string; // Example property
-}
+import ProjectType from "./projectType";
+import DownPaymentProject from "./downPaymentProject";
+import CalcButton from "./calcButton";
+type Project = {
+  img: string;
+  name: string;
+  delivery: string[];
+  installment: string[];
+};
 
 const CalcPage = () => {
-  const [projectSelect, setProjectSelect] = useState(""); // Stores the selected project name
-  const [project, setProject] = useState<Project[]>([]); // Type project as an array of Project objects
+  const [project, setProject] = useState<Project[]>([]); // Stores all projects
   const [selectedImage, setSelectedImage] = useState(""); // Stores the selected image URL
+  const [projectSelect, setProjectSelect] = useState(""); // Stores the selected project name
+  const [projectType, setProjectType] = useState(""); // Stores the selected project name
+  const [downPayment, setDownPayment] = useState(0);
+  const [percentage, setPercentage] = useState(0);
+  const [unitSpace, setUnitSpace] = useState(0);
+  const [deliveryDate, setDeliveryDate] = useState("");
+  const [installment, setInstallment] = useState("");
+  const [findSelectProject, setFindSelectProject] = useState<Partial<Project>>(
+    {}
+  );
 
   useEffect(() => {
     const projectFetch = async () => {
@@ -26,78 +37,80 @@ const CalcPage = () => {
   }, []);
 
   useEffect(() => {
-    project.map((project) => {
-      if (project.img === projectSelect) {
-        setSelectedImage(`${process.env.LOCAL_API_IMG}/image/${project.img}`);
-      } else {
-        console.log("no");
+    project.forEach((proj) => {
+      if (proj.img === projectSelect) {
+        setSelectedImage(`${process.env.LOCAL_API_IMG}/image/${proj.img}`);
+        setFindSelectProject(proj);
       }
     });
   }, [project, projectSelect]);
 
   return (
     <>
-      <div className="w-full flex justify-center items-center h-80">
+      <div className=" flex justify-center items-center w-fit h-90">
         <Image
           src={selectedImage || defaultImg}
           alt="Project Image"
           width={600}
-          height={800}
-          className="rounded-md w-full h-full"
+          height={300}
+          className="rounded-md"
         />
       </div>
-      <div className="w-full  lg:w-3/4 mt-2 flex flex-wrap justify-center gap-2 md:gap-5">
-        <div className="w-full flex gap-5">
+      <div className="w-full  lg:w-3/4 mt-2 flex flex-wrap justify-center gap-2">
+        <div className="w-full flex gap-5 flex-wrap md:flex-nowrap">
           <ProjectPage select={setProjectSelect} project={project} />
-          <select className="w-2/4 rounded-md text-xl py-4 md:p-2 px-2 bg-black text-white">
-            <option value="">type unit</option>
-            <option value="city">city</option>
-            <option value="city">city</option>
-            <option value="city">city</option>
-            <option value="city">city</option>
-          </select>
-        </div>
-        <div className="w-full flex gap-2 md:gap-5">
-          <div className="w-2/4 flex flex-wrap">
-            <input
-              type="number"
-              name=""
-              placeholder="Down Payment"
-              className="w-full p-2 text-black rounded-md"
-              id=""
-            />
-            <label className="text-slate-400">hi</label>
-          </div>
-
-          <select className="w-2/4 p-2 text-black rounded-md text-[13px] h-fit">
-            <option value="">percentage</option>
-            <option value="city">8</option>
-            <option value="city">9</option>
-            <option value="city">10</option>
-          </select>
-        </div>
-        <div className="w-full flex gap-2 md:gap-5">
-          <select className="w-full text-xl py-4 md:p-2 px-2 bg-black text-white rounded-md">
-            <option value="">delivery date</option>
-            <option value="city">8</option>
-            <option value="city">9</option>
-            <option value="city">10</option>
-          </select>
-          <select className="w-full text-xl py-4 md:p-2 px-2 bg-black text-white rounded-md">
-            <option value="">installment</option>
-            <option value="city">city</option>
-            <option value="city">city</option>
-            <option value="city">city</option>
-            <option value="city">city</option>
-          </select>
-        </div>
-        <div className="flex justify-center w-full">
-          <input
-            type="button"
-            value="calc"
-            className="bg-black text-white capitalize px-4  py-2 rounded-md shadow-md cursor-pointer w-5/12 mt-3"
+          <ProjectType
+            select={projectSelect}
+            project={project}
+            typeSelect={setProjectType}
           />
         </div>
+        <DownPaymentProject
+          downPayment={setDownPayment}
+          sPercentage={setPercentage}
+          percentage={percentage}
+          unitSpace={setUnitSpace}
+          projectType={projectType}
+          find={findSelectProject}
+        />
+
+        <div className="w-full flex gap-2 md:gap-5">
+          <select
+            value={deliveryDate}
+            onChange={(e) => setDeliveryDate(e.target.value)}
+            className="w-full text-xl py-4 md:p-2 px-2 bg-black text-white rounded-md"
+          >
+            <option value="">delivery date</option>
+            {findSelectProject?.delivery?.map((d, i) => (
+              <option value={d} key={i}>
+                {d}
+              </option>
+            ))}
+          </select>
+
+          <select
+            value={installment}
+            onChange={(e) => setInstallment(e.target.value)}
+            className="w-full text-xl py-4 md:p-2 px-2 bg-black text-white rounded-md"
+          >
+            <option value="">installment</option>
+            {findSelectProject?.installment?.map((d, i) => (
+              <option value={d} key={i}>
+                {d} y
+              </option>
+            ))}
+          </select>
+        </div>
+        <CalcButton
+          name={findSelectProject.name}
+          selectProject={projectSelect}
+          selectType={projectType}
+          downPayment={downPayment}
+          percentage={percentage}
+          unitSpace={unitSpace}
+          deliveryDate={deliveryDate}
+          installment={installment}
+        />
       </div>
     </>
   );

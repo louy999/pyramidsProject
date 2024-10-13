@@ -10,7 +10,7 @@ import path from 'path'
 import config from './config'
 import errorHandelMiddleware from './middleware/error.handel.middleware'
 import routes from './routes'
-import upload from './upload/uploadImg'
+import {uploadImg, resizeImageMiddleware} from './upload/uploadImg'
 import sendMail from './send_email/index'
 import uploadFile from './upload/uploadFile'
 
@@ -36,10 +36,15 @@ app.use('/api', routes)
 app.get('/healthz', (_req: Request, res: Response) => {
 	res.send({status: 'ok✌️'})
 })
+app.post(
+	'/upload/image',
+	uploadImg.single('image'),
+	resizeImageMiddleware,
+	(req: any, res: Response) => {
+		res.send(req.file.filename)
+	}
+)
 
-app.post('/upload/image', upload.single('image'), (req: any, res) => {
-	res.send(req.file.filename)
-})
 app.post(
 	'/upload/file',
 	uploadFile.array('file', 10),
