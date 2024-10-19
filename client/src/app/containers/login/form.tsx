@@ -24,8 +24,7 @@ const LoginForm = () => {
             }
           );
           setCookie("token", res.data.data.token);
-          setCookie("id", res.data.data.id);
-          window.history.back();
+          window.location.pathname="/";
           setTimeout(() => {
             window.location.reload();
           }, 1000);
