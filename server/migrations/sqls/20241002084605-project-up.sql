@@ -10,5 +10,8 @@ CREATE TABLE project(
     price_meter TEXT [],
     meter_start TEXT [],
     delivery TEXT [],
-    installment TEXT []
+    installment TEXT [],
+    percentage TEXT [],
+    rate_down TEXT [],
+    batch boolean
 )

@@ -83,7 +83,7 @@ const CalcPage = () => {
             <option value="">delivery date</option>
             {findSelectProject?.delivery?.map((d, i) => (
               <option value={d} key={i}>
-                {d}
+                {d} year
               </option>
             ))}
           </select>
@@ -96,7 +96,7 @@ const CalcPage = () => {
             <option value="">installment</option>
             {findSelectProject?.installment?.map((d, i) => (
               <option value={d} key={i}>
-                {d} y
+                {d} year
               </option>
             ))}
           </select>

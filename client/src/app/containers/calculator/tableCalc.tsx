@@ -8,16 +8,19 @@ const TableCalc = () => {
           <tr>
             <th scope="col" className="px-6 py-3"></th>
             <th scope="col" className="px-6 py-3">
-              Product name
+              Down Payment
             </th>
             <th scope="col" className="px-6 py-3">
-              Color
+              installment 1y
             </th>
             <th scope="col" className="px-6 py-3">
-              Category
+              installment 2y
             </th>
             <th scope="col" className="px-6 py-3">
-              Price
+              installment 3y
+            </th>
+            <th scope="col" className="px-6 py-3">
+              installment 3y
             </th>
           </tr>
         </thead>

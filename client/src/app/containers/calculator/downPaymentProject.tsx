@@ -2,23 +2,30 @@
 import React, { useState, useEffect } from "react";
 
 const DownPaymentProject = (props: any) => {
-  const priceMeter = props?.find?.price_meter || 0;
-  const meterStart = props?.find?.meter_start || 0;
+  const priceMeter = props?.find?.price_meter;
+  const meterStart = props?.find?.meter_start;
+  const percentageOptions = props?.find?.percentage || [];
+  const percentageDown =
+    props.percentage === 0 && percentageOptions.length > 0
+      ? percentageOptions[0]
+      : props.percentage;
   const typeIndex = props?.find?.type?.indexOf(props.projectType);
 
   // Ensure priceMeter and meterStart are valid numbers before doing calculations
   const minDownPayment =
     priceMeter && meterStart && typeIndex !== -1
-      ? (Number(priceMeter[typeIndex]) * Number(meterStart[typeIndex]) * 20) /
+      ? (Number(priceMeter[typeIndex]) *
+          Number(meterStart[typeIndex]) *
+          Number(percentageDown)) /
         100
       : 0; // Fallback value if something is undefined
 
   const formattedDownPayment = minDownPayment.toLocaleString();
 
   // State to manage the down payment value and error
-  const [downPayment, setDownPayment] = useState<number>(0); // Changed to number
+  const [downPayment, setDownPayment] = useState(""); // Changed to number
   const [errorMeter, setErrorMeter] = useState("");
-  const [unitSpace, setUnitSpace] = useState<number>(0); // Changed to number
+  const [unitSpace, setUnitSpace] = useState(""); // Changed to number
   const [error, setError] = useState("");
 
   const handleDownPaymentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,11 +37,6 @@ const DownPaymentProject = (props: any) => {
       setErrorMeter(`text-red-500`);
     } else {
       setErrorMeter("text-slate-400"); // Clear the error if the value is valid
-    }
-    if (value < Number(meterStart[typeIndex])) {
-      setError(`text-red-500`);
-    } else {
-      setError("text-slate-400"); // Clear the error if the value is valid
     }
   };
 
@@ -53,6 +55,7 @@ const DownPaymentProject = (props: any) => {
     props.downPayment(downPayment);
     props.unitSpace(unitSpace);
   }, [downPayment, props, unitSpace]);
+  console.log(props.find);
 
   return (
     <div className="w-full flex gap-2 md:gap-5 flex-wrap md:flex-nowrap">
@@ -66,9 +69,11 @@ const DownPaymentProject = (props: any) => {
           value={downPayment}
           onChange={handleDownPaymentChange}
         />
-        <label className={`${errorMeter}`}>
-          min~{formattedDownPayment || "N/A"}
-        </label>
+        {errorMeter && (
+          <label className={`${errorMeter}`}>
+            min~{formattedDownPayment || "N/A"}
+          </label>
+        )}
       </div>
       <select
         className="w-full md:w-1/5 p-2 text-black rounded-md text-[13px] h-10"
@@ -76,10 +81,11 @@ const DownPaymentProject = (props: any) => {
         onChange={(e) => props.sPercentage(e.target.value)}
       >
         <option value="">percentage</option>
-        <option value="20">20%</option>
-        <option value="30">30%</option>
-        <option value="40">40%</option>
-        <option value="50">50%</option>
+        {props?.find?.percentage?.map((p, i) => (
+          <option value={p} key={i}>
+            {p}%
+          </option>
+        ))}
       </select>
       <div className="w-full md:w-2/5">
         <input
@@ -91,7 +97,9 @@ const DownPaymentProject = (props: any) => {
           className="w-full p-2 text-black rounded-md"
           id=""
         />
-        <label className={`${error}`}>min~{meterStart[typeIndex]}m</label>
+        {error && (
+          <label className={`${error}`}>min~{meterStart[typeIndex]}m</label>
+        )}
       </div>
     </div>
   );

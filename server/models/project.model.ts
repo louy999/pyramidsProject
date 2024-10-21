@@ -8,7 +8,7 @@ class ProjectsModel {
 			//open connect with DB1
 			const connect = await db.connect()
 			const sql =
-				'INSERT INTO project ( name, description, img, type , price_meter, meter_start, delivery, installment) values ($1, $2, $3, $4, $5, $6, $7, $8) returning *'
+				'INSERT INTO project ( name, description, img, type , price_meter, meter_start, delivery, installment, percentage, rate_down, batch) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *'
 			//run query
 			const result = await connect.query(sql, [
 				u.name,
@@ -19,6 +19,9 @@ class ProjectsModel {
 				u.meter_start,
 				u.delivery,
 				u.installment,
+				u.percentage,
+				u.rate_down,
+				u.batch,
 			])
 			//release connect
 			connect.release()
@@ -81,7 +84,7 @@ class ProjectsModel {
 			//open connect with DB
 			const connect = await db.connect()
 			const sql =
-				'UPDATE project SET  name=$1, description=$2, img=$3, type=$4, price_meter=$5, meter_start=$6, delivery=$7, installment=$8 WHERE id=$9 RETURNING *'
+				'UPDATE project SET  name=$1, description=$2, img=$3, type=$4, price_meter=$5, meter_start=$6, delivery=$7, installment=$8, percentage=$9, rate_down=$10, batch=$11 WHERE id=$12 RETURNING *'
 			//run query
 			const result = await connect.query(sql, [
 				u.name,
@@ -92,6 +95,9 @@ class ProjectsModel {
 				u.meter_start,
 				u.delivery,
 				u.installment,
+				u.percentage,
+				u.rate_down,
+				u.batch,
 				u.id,
 			])
 			//release connect

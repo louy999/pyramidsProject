@@ -10,6 +10,9 @@ type ProjectsType = {
 	delivery: string
 	floor: string
 	installment: string
+	percentage: string
+	rate_down: string
+	batch: boolean
 }
 
 export default ProjectsType

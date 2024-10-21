@@ -2,9 +2,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { setCookie } from "cookies-next";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 const LoginForm = () => {
+  const router = useRouter();
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -24,7 +26,7 @@ const LoginForm = () => {
             }
           );
           setCookie("token", res.data.data.token);
-          window.location.pathname="/";
+          router.replace("/");
           setTimeout(() => {
             window.location.reload();
           }, 1000);

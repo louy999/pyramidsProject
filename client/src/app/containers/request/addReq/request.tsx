@@ -2,10 +2,11 @@
 import { useState } from "react";
 import axios from "axios";
 
-const AddRequest = ({ user }) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const AddRequest = ({ user }: any) => {
   const [textReq, setTextReq] = useState("");
 
-  const addRequestFetch = async (e) => {
+  const addRequestFetch = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     if (user !== null) {
       const res = await axios.post(`${process.env.LOCAL_API_URL}/req`, {
