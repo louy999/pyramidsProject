@@ -2,8 +2,8 @@
 import React, { useState, useEffect } from "react";
 
 const DownPaymentProject = (props: any) => {
-  const priceMeter = props?.find?.price_meter;
-  const meterStart = props?.find?.meter_start;
+  const priceMeter = props?.find?.price_meter || [];
+  const meterStart = props?.find?.meter_start || [];
   const percentageOptions = props?.find?.percentage || [];
   const percentageDown =
     props.percentage === 0 && percentageOptions.length > 0
@@ -23,9 +23,9 @@ const DownPaymentProject = (props: any) => {
   const formattedDownPayment = minDownPayment.toLocaleString();
 
   // State to manage the down payment value and error
-  const [downPayment, setDownPayment] = useState(""); // Changed to number
+  const [downPayment, setDownPayment] = useState<number>(0); // Initialized as number
   const [errorMeter, setErrorMeter] = useState("");
-  const [unitSpace, setUnitSpace] = useState(""); // Changed to number
+  const [unitSpace, setUnitSpace] = useState<number>(0); // Initialized as number
   const [error, setError] = useState("");
 
   const handleDownPaymentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -81,7 +81,7 @@ const DownPaymentProject = (props: any) => {
         onChange={(e) => props.sPercentage(e.target.value)}
       >
         <option value="">percentage</option>
-        {props?.find?.percentage?.map((p, i) => (
+        {props?.find?.percentage?.map((p: number | string, i: number) => (
           <option value={p} key={i}>
             {p}%
           </option>

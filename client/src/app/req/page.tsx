@@ -4,7 +4,8 @@ import GetRequest from "../containers/request/getReq/request";
 
 const RequestPage = () => {
   const headersList = headers();
-  const user = headersList.get("x-user");
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const user: any = headersList.get("x-user");
 
   return (
     <div className="w-full lg:w-3/4  relative left-2/4 -translate-x-2/4 top-20  p-2 rounded-md">
