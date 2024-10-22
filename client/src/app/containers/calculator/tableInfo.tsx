@@ -1,8 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react";
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 const TableInfo = (props: any) => {
-  console.log(props);
 
   return (
     <div className="overflow-x-auto max-w-full rounded-md">

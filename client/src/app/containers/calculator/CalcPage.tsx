@@ -56,7 +56,7 @@ const CalcPage = () => {
           className="rounded-md"
         />
       </div>
-      <div className="w-full  lg:w-3/4 mt-2 flex flex-wrap justify-center gap-2">
+      <div className="w-full mt-2 flex flex-wrap justify-center gap-2">
         <div className="w-full flex gap-5 flex-wrap md:flex-nowrap">
           <ProjectPage select={setProjectSelect} project={project} />
           <ProjectType
@@ -104,6 +104,7 @@ const CalcPage = () => {
         <CalcButton
           name={findSelectProject.name}
           selectProject={projectSelect}
+          find={findSelectProject}
           selectType={projectType}
           downPayment={downPayment}
           percentage={percentage}
