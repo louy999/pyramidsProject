@@ -103,12 +103,6 @@ const LoginForm = () => {
           </div>
           <div className="flex justify-between px-2 ">
             <Link
-              href="/"
-              className="cursor-pointer opacity-50 hover:opacity-100 hover:bg-color1 rounded-md duration-300 hover:text-color2 hover:px-2 hover:py-1"
-            >
-              Forget Password
-            </Link>
-            <Link
               href="/register"
               className="cursor-pointer opacity-50 hover:opacity-100 hover:bg-color1 rounded-md duration-300 hover:text-color2 hover:px-2 hover:py-1"
             >
