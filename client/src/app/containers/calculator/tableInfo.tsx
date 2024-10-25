@@ -1,7 +1,7 @@
-
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const TableInfo = (props: any) => {
-
+  const totalPrice = (props?.info?.downPayment / 20) * 100;
+  const downPayment = props?.info?.downPayment;
   return (
     <div className="overflow-x-auto max-w-full rounded-md">
       <table className="w-full text-sm text-left rtl:text-right text-gray-500">
@@ -12,6 +12,9 @@ const TableInfo = (props: any) => {
             </th>
             <th scope="col" className="px-6 py-3">
               Unit Type
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Total Price
             </th>
             <th scope="col" className="px-6 py-3">
               Down Payment
@@ -39,11 +42,12 @@ const TableInfo = (props: any) => {
               {props?.info?.name}
             </th>
             <td className="px-6 py-4">{props?.info?.selectType}</td>
-            <td className="px-6 py-4">{props?.info?.downPayment}</td>
+            <td className="px-6 py-4">{totalPrice.toLocaleString()} EGP</td>
+            <td className="px-6 py-4">{downPayment.toLocaleString()} EGP</td>
             <td className="px-6 py-4">{props?.info?.percentage}%</td>
             <td className="px-6 py-4">{props?.info?.unitSpace}m</td>
-            <td className="px-6 py-4">{props?.info?.deliveryDate}</td>
-            <td className="px-6 py-4">{props?.info?.installment}</td>
+            <td className="px-6 py-4">{props?.info?.deliveryDate} years</td>
+            <td className="px-6 py-4">{props?.info?.installment} years</td>
           </tr>
         </tbody>
       </table>

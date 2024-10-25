@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import TableInfo from "./tableInfo";
 import TableCalc from "./tableCalc";
+import AfterDel from "./afterDel";
 type Project = {
   img: string;
   name: string;
@@ -79,6 +80,7 @@ const CalcButton: React.FC<CalcButtonProps> = (props) => {
       >
         <TableInfo info={props} />
         <TableCalc info={props} />
+        <AfterDel info={props} />
       </div>
     </>
   );

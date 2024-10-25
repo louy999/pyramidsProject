@@ -52,8 +52,7 @@ const TableCalc = (props: any) => {
 
   const totalPrice =
     (Number(props?.info?.downPayment) / props?.info?.percentage) * 100;
-  console.log("totalPrice " + totalPrice);
-
+  let price = 0;
   return (
     <div className="overflow-x-auto rounded-md">
       <table className="w-full text-sm text-left rtl:text-right text-gray-500">
@@ -78,7 +77,7 @@ const TableCalc = (props: any) => {
             </td>
             {Array.from({ length: DeliveryDateLoop }, (_, index) => {
               if (index < installmentAmounts.length) {
-                const price = (totalPrice * installmentAmounts[index]) / 100;
+                price = (totalPrice * installmentAmounts[index]) / 100;
                 return (
                   <td key={index} scope="col" className="px-6 py-3">
                     {price.toLocaleString()} EGP
@@ -105,11 +104,11 @@ const TableCalc = (props: any) => {
             </td>
             {Array.from({ length: DeliveryDateLoop }, (_, index) => {
               if (props.info.find.batch && index < installmentAmounts.length) {
-                const price =
-                  (returnDownPayment * installmentAmounts[index]) / 100;
+                const returnBa = (price * 10) / 100;
+
                 return (
                   <td key={index} scope="col" className="px-6 py-3">
-                    {price.toLocaleString()} EGP
+                    {returnBa.toLocaleString()} EGP
                   </td>
                 );
               } else {

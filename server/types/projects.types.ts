@@ -13,6 +13,7 @@ type ProjectsType = {
 	percentage: string
 	rate_down: string
 	batch: boolean
+	distention: string
 }
 
 export default ProjectsType

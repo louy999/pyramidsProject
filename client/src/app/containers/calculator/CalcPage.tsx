@@ -80,12 +80,14 @@ const CalcPage = () => {
             onChange={(e) => setDeliveryDate(e.target.value)}
             className="w-full text-xl py-4 md:p-2 px-2 bg-black text-white rounded-md"
           >
-            <option value="">delivery date</option>
-            {findSelectProject?.delivery?.map((d, i) => (
-              <option value={d} key={i}>
-                {d} year
-              </option>
-            ))}
+            <option value="">Delivery Date</option>
+            {findSelectProject?.delivery?.map(
+              (d: string | number, i: number) => (
+                <option value={d} key={i}>
+                  {d == 0 ? "Ready To Move" : `${d} year`}
+                </option>
+              )
+            )}
           </select>
 
           <select

@@ -62,13 +62,13 @@ class OffersModel {
 			throw new Error(`.could not find Req ${id}, ${err}`)
 		}
 	}
-	async getByProjectId(name: string): Promise<OffersType[]> {
+	async getByProjectId(project_id: string): Promise<OffersType[]> {
 		try {
 			//open connect with DB
 			const connect = await db.connect()
-			const sql = 'SELECT * from offer WHERE name=($1)'
+			const sql = 'SELECT * from offer WHERE project_id=($1)'
 			//run query
-			const result = await connect.query(sql, [name])
+			const result = await connect.query(sql, [project_id])
 			//release connect
 			connect.release()
 			//return created Req

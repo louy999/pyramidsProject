@@ -44,7 +44,7 @@ routes.get('/:id', async (req: Request, res: Response, next) => {
 routes.get('/project/:project', async (req: Request, res: Response, next) => {
 	try {
 		const offer = await offersModel.getByProjectId(
-			req.params.user_id as unknown as string
+			req.params.project as unknown as string
 		)
 		res.json({
 			status: 'success',

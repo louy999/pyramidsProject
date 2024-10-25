@@ -13,5 +13,6 @@ CREATE TABLE project(
     installment TEXT [],
     percentage TEXT [],
     rate_down TEXT [],
-    batch boolean
+    batch boolean,
+    distention VARCHAR(200)
 )
